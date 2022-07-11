@@ -6,15 +6,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BonusServiceTest {
 
     @Test
     void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoAlto() {
         BonusService service = new BonusService();
-        BigDecimal bonus = service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal("25000")));
 
-        assertEquals(BigDecimal.ZERO, bonus);
+//        try {
+//            service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal("25000"))));
+//            fail ("Não deu a exception!");
+//        } catch (Exception e) {
+//            assertEquals("Funcionario com salario maior do que R$10000 nao pode receber bonus!", e.getMessage());
+//        }
+        assertThrows(IllegalArgumentException.class, ()->
+                service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal("25000")))) ;
     }
 
     @Test
